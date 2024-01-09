@@ -1,4 +1,4 @@
-package com.techchallenge.mspayments.application.entrypoint.rest.dto;
+package com.techchallenge.mspayments.application.entrypoint.rest.paymentoption.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

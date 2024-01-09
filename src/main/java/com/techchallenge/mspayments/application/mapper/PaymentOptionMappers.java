@@ -3,7 +3,7 @@ package com.techchallenge.mspayments.application.mapper;
 import com.techchallenge.mspayments.application.builders.PaymentOptionDomainEntityInputBuilder;
 import com.techchallenge.mspayments.application.builders.PaymentOptionDomainEntityOutputBuilder;
 import com.techchallenge.mspayments.application.builders.PaymentOptionEntityBuilder;
-import com.techchallenge.mspayments.application.entrypoint.rest.dto.PaymentOptionDTO;
+import com.techchallenge.mspayments.application.entrypoint.rest.paymentoption.dto.PaymentOptionDTO;
 import com.techchallenge.mspayments.domain.entity.PaymentOptionDomainEntityInput;
 import com.techchallenge.mspayments.domain.entity.PaymentOptionDomainEntityOutput;
 import com.techchallenge.mspayments.repositories.paymentsdatabase.entity.PaymentOptionEntity;

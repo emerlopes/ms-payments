@@ -1,6 +1,6 @@
-package com.techchallenge.mspayments.application.entrypoint.rest;
+package com.techchallenge.mspayments.application.entrypoint.rest.paymentoption;
 
-import com.techchallenge.mspayments.application.entrypoint.rest.dto.PaymentOptionDTO;
+import com.techchallenge.mspayments.application.entrypoint.rest.paymentoption.dto.PaymentOptionDTO;
 import com.techchallenge.mspayments.application.mapper.PaymentOptionMappers;
 import com.techchallenge.mspayments.domain.usecase.IExecuteCreatePaymentOptionUseCase;
 import com.techchallenge.mspayments.domain.usecase.IExecuteFindPaymentOptionsUseCase;
