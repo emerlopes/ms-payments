@@ -50,7 +50,7 @@ jobs:
       - name: Pull image from Docker Hub
         uses: docker/metadata-action@v3
         with:
-          images: ${{ secrets.DOCKER_USERNAME }}/spring-boot-docker:${{ github.sha }}
+          images: ${{ secrets.DOCKER_USERNAME }}/$CONTAINER_NAME:${{ github.sha }}
       - name: Show environment variables
         run: |
           echo "DATABASE_URL: $DATABASE_URL"
