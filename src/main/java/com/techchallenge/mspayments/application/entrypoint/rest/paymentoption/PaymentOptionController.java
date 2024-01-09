@@ -2,10 +2,10 @@ package com.techchallenge.mspayments.application.entrypoint.rest.paymentoption;
 
 import com.techchallenge.mspayments.application.entrypoint.rest.paymentoption.dto.PaymentOptionDTO;
 import com.techchallenge.mspayments.application.mapper.PaymentOptionMappers;
+import com.techchallenge.mspayments.application.mapper.PaymentOptionTypeMappers;
 import com.techchallenge.mspayments.domain.usecase.IExecuteCreatePaymentOptionUseCase;
 import com.techchallenge.mspayments.domain.usecase.IExecuteFindPaymentOptionsUseCase;
 import com.techchallenge.mspayments.domain.usecase.paymentoptiostype.IExecuteFindPaymentOptionTypeByIdUseCase;
-import com.techchallenge.mspayments.repositories.paymentsdatabase.entity.PaymentOptionTypeEntity;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +33,9 @@ public class PaymentOptionController {
     public ResponseEntity<?> savePaymentOption(@Valid @RequestBody PaymentOptionDTO paymentOptionDTO) {
         final var paymentOptionDoamainEntityInput = PaymentOptionMappers.mapToPaymentOptionDomainEntityInput(paymentOptionDTO);
         final var paymentOptionType = executeFindPaymentOptionTypeByIdUseCase.execute(paymentOptionDTO.getPaymentOptionTypeId());
+        final var paymentOptionTypeEntity = PaymentOptionTypeMappers.mapToPaymentOptionEntity(paymentOptionType.getData());
 
-        paymentOptionDoamainEntityInput.setPaymentOptionType(new PaymentOptionTypeEntity());
+        paymentOptionDoamainEntityInput.setPaymentOptionType(paymentOptionTypeEntity);
 
         final var paymentOption = executeCreatePaymentOptionUseCase.execute(paymentOptionDoamainEntityInput);
         return ResponseEntity.status(HttpStatus.CREATED).body(paymentOption);

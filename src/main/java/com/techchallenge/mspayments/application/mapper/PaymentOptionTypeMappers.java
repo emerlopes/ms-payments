@@ -52,4 +52,11 @@ public class PaymentOptionTypeMappers {
                 .withPaymentOptionType(input.getPaymentOptionType())
                 .build();
     }
+
+    public static PaymentOptionTypeEntity mapToPaymentOptionEntity(PaymentOptionTypeDomainEntityOutput input) {
+        return new PaymentOptionTypeEntityBuilder()
+                .withPaymentOptionTypeId(input.getPaymentOptionTypeId())
+                .withPaymentOptionType(input.getPaymentOptionType())
+                .build();
+    }
 }

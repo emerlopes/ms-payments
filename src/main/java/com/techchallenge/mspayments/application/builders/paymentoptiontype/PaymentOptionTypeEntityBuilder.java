@@ -11,6 +11,11 @@ public class PaymentOptionTypeEntityBuilder {
         this.paymentOptionTypeEntity = new PaymentOptionTypeEntity();
     }
 
+    public PaymentOptionTypeEntityBuilder withPaymentOptionTypeId(Long paymentOptionTypeId) {
+        this.paymentOptionTypeEntity.setPaymentOptionTypeId(paymentOptionTypeId);
+        return this;
+    }
+
     public PaymentOptionTypeEntityBuilder withPaymentOptionType(PaymentOptionTypeEnum paymentOptionTypeEnum) {
         this.paymentOptionTypeEntity.setPaymentOptionType(paymentOptionTypeEnum);
         return this;
