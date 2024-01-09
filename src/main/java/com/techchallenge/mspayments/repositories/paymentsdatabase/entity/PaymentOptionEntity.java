@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -28,4 +29,7 @@ public class PaymentOptionEntity {
     @ManyToOne
     @JoinColumn(name = "payment_option_type_id")
     private PaymentOptionTypeEntity paymentOptionType;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }
