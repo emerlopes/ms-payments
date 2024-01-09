@@ -10,7 +10,7 @@ public interface IPaymentOptionTypeDomainService {
 
     PaymentOptionTypeDomainEntityOutput savePaymentOptionType(PaymentOptionTypeDomainEntityInput input);
 
-    PaymentOptionTypeDomainEntityOutput findPaymentOptionTypeById(PaymentOptionTypeDomainEntityInput input);
+    PaymentOptionTypeDomainEntityOutput findPaymentOptionTypeById(Long input);
 
     List<PaymentOptionTypeDomainEntityOutput> findAllPaymentOptions();
 

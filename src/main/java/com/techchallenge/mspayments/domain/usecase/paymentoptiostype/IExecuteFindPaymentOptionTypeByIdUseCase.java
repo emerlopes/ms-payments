@@ -5,5 +5,5 @@ import com.techchallenge.mspayments.domain.entity.PaymentOptionTypeDomainEntityO
 import com.techchallenge.mspayments.domain.shared.CustomData;
 import com.techchallenge.mspayments.domain.shared.IExecuteArgs;
 
-public interface IExecuteFindPaymentOptionTypeByIdUseCase extends IExecuteArgs<CustomData<PaymentOptionTypeDomainEntityOutput>, PaymentOptionTypeDomainEntityInput> {
+public interface IExecuteFindPaymentOptionTypeByIdUseCase extends IExecuteArgs<CustomData<PaymentOptionTypeDomainEntityOutput>, Long> {
 }

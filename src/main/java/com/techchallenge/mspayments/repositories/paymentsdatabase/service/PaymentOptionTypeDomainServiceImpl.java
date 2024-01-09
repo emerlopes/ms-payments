@@ -28,8 +28,9 @@ public class PaymentOptionTypeDomainServiceImpl implements IPaymentOptionTypeDom
     }
 
     @Override
-    public PaymentOptionTypeDomainEntityOutput findPaymentOptionTypeById(PaymentOptionTypeDomainEntityInput input) {
-        return null;
+    public PaymentOptionTypeDomainEntityOutput findPaymentOptionTypeById(Long input) {
+        final var entity = paymentOptionTypeEntityRepository.findById(input);
+        return PaymentOptionTypeMappers.mapToPaymentOptionTypeDomainEntityOutput(entity.get());
     }
 
     @Override
