@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      CONTAINER_NAME: ms-payments
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
@@ -34,7 +32,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/$CONTAINER_NAME:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.CONTAINER_NAME }}:${{ github.sha }}
 
   deploy:
     needs: build
@@ -43,7 +41,7 @@ jobs:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
       DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-      CONTAINER_NAME: ms-payments
+      CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
     steps:
       - name: Pull the latest Docker image
         uses: docker/metadata-action@v3
@@ -58,7 +56,7 @@ jobs:
 
       - name: Stop and remove the previous container
         run: |
-          if sudo docker ps -a | grep -q $CONTAINER_NAME; then
+          if sudo docker ps -a | grep -q ${{ secrets.CONTAINER_NAME }}; then
             sudo docker stop $CONTAINER_NAME
             sudo docker rm $CONTAINER_NAME
           fi
@@ -71,4 +69,4 @@ jobs:
             -e DATABASE_URL=$DATABASE_URL \
             -e DATABASE_USERNAME=$DATABASE_USERNAME \
             -e DATABASE_PASSWORD=$DATABASE_PASSWORD \
-            ${{ secrets.DOCKER_USERNAME }}/$CONTAINER_NAME:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/${{ secrets.CONTAINER_NAME }}:${{ github.sha }}
