@@ -1,12 +1,11 @@
 package com.techchallenge.mspayments.application.entrypoint.rest.paymentoption;
 
-import com.techchallenge.mspayments.application.entrypoint.rest.paymentoption.PaymentOptionController;
 import com.techchallenge.mspayments.application.entrypoint.rest.paymentoption.dto.PaymentOptionDTO;
 
 import com.techchallenge.mspayments.domain.entity.PaymentOptionDomainEntityOutput;
 import com.techchallenge.mspayments.domain.entity.PaymentOptionTypeDomainEntityOutput;
 import com.techchallenge.mspayments.domain.shared.CustomData;
-import com.techchallenge.mspayments.domain.usecase.IExecuteCreatePaymentOptionUseCase;
+import com.techchallenge.mspayments.domain.usecase.IExecuteSavePaymentOptionUseCase;
 import com.techchallenge.mspayments.domain.usecase.IExecuteFindPaymentOptionsUseCase;
 import com.techchallenge.mspayments.domain.usecase.paymentoptiostype.IExecuteFindPaymentOptionTypeByIdUseCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +26,7 @@ public class PaymentOptionControllerTest {
     private PaymentOptionController paymentOptionController;
 
     @Mock
-    private IExecuteCreatePaymentOptionUseCase createPaymentOptionUseCase;
+    private IExecuteSavePaymentOptionUseCase createPaymentOptionUseCase;
 
     @Mock
     private IExecuteFindPaymentOptionsUseCase findPaymentOptionsUseCase;

@@ -3,30 +3,31 @@ package com.techchallenge.mspayments.application.entrypoint.rest.paymentoption;
 import com.techchallenge.mspayments.application.entrypoint.rest.paymentoption.dto.PaymentOptionDTO;
 import com.techchallenge.mspayments.application.mapper.PaymentOptionMappers;
 import com.techchallenge.mspayments.application.mapper.PaymentOptionTypeMappers;
-import com.techchallenge.mspayments.domain.usecase.IExecuteCreatePaymentOptionUseCase;
+import com.techchallenge.mspayments.domain.usecase.IExecuteFindPaymentOptionByIdUseCase;
+import com.techchallenge.mspayments.domain.usecase.IExecuteSavePaymentOptionUseCase;
 import com.techchallenge.mspayments.domain.usecase.IExecuteFindPaymentOptionsUseCase;
 import com.techchallenge.mspayments.domain.usecase.paymentoptiostype.IExecuteFindPaymentOptionTypeByIdUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/payment-options")
 public class PaymentOptionController {
 
-    private final IExecuteCreatePaymentOptionUseCase executeCreatePaymentOptionUseCase;
+    private final IExecuteSavePaymentOptionUseCase executeCreatePaymentOptionUseCase;
     private final IExecuteFindPaymentOptionsUseCase executeFindPaymentOptionsUseCase;
-
     private final IExecuteFindPaymentOptionTypeByIdUseCase executeFindPaymentOptionTypeByIdUseCase;
+    private final IExecuteFindPaymentOptionByIdUseCase executeFindPaymentOptionByIdUseCase;
 
-    public PaymentOptionController(IExecuteCreatePaymentOptionUseCase executeCreatePaymentOptionUseCase, IExecuteFindPaymentOptionsUseCase executeFindPaymentOptionsUseCase, IExecuteFindPaymentOptionTypeByIdUseCase executeFindPaymentOptionTypeByIdUseCase) {
+    public PaymentOptionController(IExecuteSavePaymentOptionUseCase executeCreatePaymentOptionUseCase, IExecuteFindPaymentOptionsUseCase executeFindPaymentOptionsUseCase, IExecuteFindPaymentOptionTypeByIdUseCase executeFindPaymentOptionTypeByIdUseCase, IExecuteFindPaymentOptionByIdUseCase executeFindPaymentOptionByIdUseCase) {
         this.executeCreatePaymentOptionUseCase = executeCreatePaymentOptionUseCase;
         this.executeFindPaymentOptionsUseCase = executeFindPaymentOptionsUseCase;
         this.executeFindPaymentOptionTypeByIdUseCase = executeFindPaymentOptionTypeByIdUseCase;
+        this.executeFindPaymentOptionByIdUseCase = executeFindPaymentOptionByIdUseCase;
     }
 
     @RequestMapping
@@ -45,5 +46,11 @@ public class PaymentOptionController {
     public ResponseEntity<?> findPaymentOptions() {
         final var paymentOptions = executeFindPaymentOptionsUseCase.execute();
         return ResponseEntity.status(HttpStatus.OK).body(paymentOptions);
+    }
+
+    @GetMapping("/{externalDriverId}")
+    public ResponseEntity<?> findPaymentOptionByExternalDriverId(@PathVariable UUID externalDriverId) {
+        final var paymentOption = executeFindPaymentOptionByIdUseCase.execute(externalDriverId);
+        return ResponseEntity.status(HttpStatus.OK).body(paymentOption);
     }
 }
