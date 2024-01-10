@@ -8,6 +8,7 @@ import com.techchallenge.mspayments.repositories.paymentsdatabase.repository.IPa
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PaymentOptiosDomainServiceImp implements IPaymentOptiosDomainService {
@@ -19,7 +20,7 @@ public class PaymentOptiosDomainServiceImp implements IPaymentOptiosDomainServic
     }
 
     @Override
-    public PaymentOptionDomainEntityOutput createPaymentOption(PaymentOptionDomainEntityInput input) {
+    public PaymentOptionDomainEntityOutput savePaymentOption(PaymentOptionDomainEntityInput input) {
         final var entity = PaymentOptionMappers.mapToPaymentEntity(input);
         final var entitySaved = paymentOptionEntityRepository.save(entity);
 
@@ -30,5 +31,11 @@ public class PaymentOptiosDomainServiceImp implements IPaymentOptiosDomainServic
     public List<PaymentOptionDomainEntityOutput> findPaymentOptions() {
         final var entities = paymentOptionEntityRepository.findAll();
         return PaymentOptionMappers.mapToPaymentOptionsDomainEntitiesOutput(entities);
+    }
+
+    @Override
+    public PaymentOptionDomainEntityOutput findPaymentOptionExternalDriverId(UUID id) {
+        final var entity = paymentOptionEntityRepository.findByExternalDriverId(id);
+        return PaymentOptionMappers.mapToPaymentOptionDomainEntityOutput(entity);
     }
 }
