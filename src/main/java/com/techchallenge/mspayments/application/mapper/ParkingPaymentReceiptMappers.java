@@ -31,12 +31,13 @@ public class ParkingPaymentReceiptMappers {
     }
 
     public static ParkingPaymentReceiptEntity mapToParkingPaymentReceiptEntity(ParkingPaymentReceiptDomainEntityInput input) {
+
         final var parkingPaymentReceiptEntity = new ParkingPaymentReceiptEntity();
         parkingPaymentReceiptEntity.setPaymentDate(LocalDateTime.now());
         parkingPaymentReceiptEntity.setCustomerName(input.getCustomerName());
         parkingPaymentReceiptEntity.setVehiclePlateNumber(input.getVehiclePlateNumber());
         parkingPaymentReceiptEntity.setPaymentAmount(input.getPaymentAmount());
         parkingPaymentReceiptEntity.setPaymentMethod(input.getPaymentMethod());
-        return null;
+        return parkingPaymentReceiptEntity;
     }
 }

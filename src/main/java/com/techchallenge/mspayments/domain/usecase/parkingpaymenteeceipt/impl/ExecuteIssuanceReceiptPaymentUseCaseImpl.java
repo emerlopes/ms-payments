@@ -3,6 +3,7 @@ package com.techchallenge.mspayments.domain.usecase.parkingpaymenteeceipt.impl;
 import com.techchallenge.mspayments.domain.entity.ParkingPaymentReceiptDomainEntityInput;
 import com.techchallenge.mspayments.domain.entity.ParkingPaymentReceiptDomainEntityOutput;
 import com.techchallenge.mspayments.domain.service.IssuanceReceiptPaymentDomainService;
+import com.techchallenge.mspayments.domain.shared.CustomData;
 import com.techchallenge.mspayments.domain.usecase.parkingpaymenteeceipt.ExecuteIssuanceReceiptPaymentUseCase;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +17,12 @@ public class ExecuteIssuanceReceiptPaymentUseCaseImpl implements ExecuteIssuance
     }
 
     @Override
-    public ParkingPaymentReceiptDomainEntityOutput execute(ParkingPaymentReceiptDomainEntityInput input) {
+    public CustomData<ParkingPaymentReceiptDomainEntityOutput> execute(ParkingPaymentReceiptDomainEntityInput input) {
+        final var output = issuanceReceiptPaymentDomainService.saveIssuanceReceiptPayment(input);
+        final CustomData<ParkingPaymentReceiptDomainEntityOutput> customData = new CustomData<>();
 
-//        return issuanceReceiptPaymentDomainService.saveIssuanceReceiptPayment();
+        customData.setData(output);
 
-        return null;
+        return customData;
     }
 }
