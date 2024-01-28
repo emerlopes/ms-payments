@@ -1,5 +1,6 @@
 package com.techchallenge.mspayments.domain.usecase.parkingpaymenteeceipt.impl;
 
+import com.techchallenge.mspayments.domain.entity.ParkingPaymentReceiptDomainEntityInput;
 import com.techchallenge.mspayments.domain.entity.ParkingPaymentReceiptDomainEntityOutput;
 import com.techchallenge.mspayments.domain.service.IssuanceReceiptPaymentDomainService;
 import com.techchallenge.mspayments.domain.usecase.parkingpaymenteeceipt.ExecuteIssuanceReceiptPaymentUseCase;
@@ -15,7 +16,7 @@ public class ExecuteIssuanceReceiptPaymentUseCaseImpl implements ExecuteIssuance
     }
 
     @Override
-    public ParkingPaymentReceiptDomainEntityOutput execute(Long parkingControlId) {
+    public ParkingPaymentReceiptDomainEntityOutput execute(ParkingPaymentReceiptDomainEntityInput input) {
 
 //        return issuanceReceiptPaymentDomainService.saveIssuanceReceiptPayment();
 
