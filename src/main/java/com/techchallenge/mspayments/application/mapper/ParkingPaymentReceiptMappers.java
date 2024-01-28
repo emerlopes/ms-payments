@@ -1,5 +1,6 @@
 package com.techchallenge.mspayments.application.mapper;
 
+import com.techchallenge.mspayments.application.entrypoint.rest.paymentreceipt.dto.PaymentReceiptDTO;
 import com.techchallenge.mspayments.domain.entity.ParkingPaymentReceiptDomainEntityInput;
 import com.techchallenge.mspayments.domain.entity.ParkingPaymentReceiptDomainEntityOutput;
 import com.techchallenge.mspayments.repositories.paymentsdatabase.entity.ParkingPaymentReceiptEntity;
@@ -7,6 +8,16 @@ import com.techchallenge.mspayments.repositories.paymentsdatabase.entity.Parking
 import java.time.LocalDateTime;
 
 public class ParkingPaymentReceiptMappers {
+
+    public static ParkingPaymentReceiptDomainEntityInput mapToParkingPaymentReceiptDomainEntityInput(PaymentReceiptDTO input) {
+        return ParkingPaymentReceiptDomainEntityInput.builder()
+                .paymentDate(input.getPaymentDate())
+                .customerName(input.getCustomerName())
+                .vehiclePlateNumber(input.getVehiclePlateNumber())
+                .paymentAmount(input.getPaymentAmount())
+                .paymentMethod(input.getPaymentMethod())
+                .build();
+    }
 
     public static ParkingPaymentReceiptDomainEntityOutput mapToParkingPaymentReceiptDomainEntityOutput(ParkingPaymentReceiptEntity entity) {
         return ParkingPaymentReceiptDomainEntityOutput.builder()
