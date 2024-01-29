@@ -4,11 +4,14 @@ import com.techchallenge.mspayments.domain.entity.PaymentOptionDomainEntityInput
 import com.techchallenge.mspayments.domain.entity.PaymentOptionDomainEntityOutput;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IPaymentOptiosDomainService {
 
-    PaymentOptionDomainEntityOutput createPaymentOption(PaymentOptionDomainEntityInput input);
+    PaymentOptionDomainEntityOutput savePaymentOption(PaymentOptionDomainEntityInput input);
 
     List<PaymentOptionDomainEntityOutput> findPaymentOptions();
+
+    PaymentOptionDomainEntityOutput findPaymentOptionByExternalDriverId(UUID id);
 
 }
