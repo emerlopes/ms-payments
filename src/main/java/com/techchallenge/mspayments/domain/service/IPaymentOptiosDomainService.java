@@ -12,6 +12,6 @@ public interface IPaymentOptiosDomainService {
 
     List<PaymentOptionDomainEntityOutput> findPaymentOptions();
 
-    PaymentOptionDomainEntityOutput findPaymentOptionExternalDriverId(UUID id);
+    PaymentOptionDomainEntityOutput findPaymentOptionByExternalDriverId(UUID id);
 
 }

@@ -22,6 +22,11 @@ public class PaymentOptiosDomainServiceImp implements IPaymentOptiosDomainServic
     @Override
     public PaymentOptionDomainEntityOutput savePaymentOption(PaymentOptionDomainEntityInput input) {
         final var entity = PaymentOptionMappers.mapToPaymentEntity(input);
+        final var oldPaymentOption = paymentOptionEntityRepository.findByExternalDriverId(entity.getExternalDriverId());
+
+        if (oldPaymentOption != null)
+            paymentOptionEntityRepository.delete(oldPaymentOption);
+
         final var entitySaved = paymentOptionEntityRepository.save(entity);
 
         return PaymentOptionMappers.mapToPaymentOptionDomainEntityOutput(entitySaved);
@@ -34,7 +39,7 @@ public class PaymentOptiosDomainServiceImp implements IPaymentOptiosDomainServic
     }
 
     @Override
-    public PaymentOptionDomainEntityOutput findPaymentOptionExternalDriverId(UUID id) {
+    public PaymentOptionDomainEntityOutput findPaymentOptionByExternalDriverId(UUID id) {
         final var entity = paymentOptionEntityRepository.findByExternalDriverId(id);
         return PaymentOptionMappers.mapToPaymentOptionDomainEntityOutput(entity);
     }
