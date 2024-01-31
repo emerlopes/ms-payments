@@ -1,5 +1,6 @@
 package com.techchallenge.mspayments.repositories.paymentsdatabase.service;
 
+import com.techchallenge.mspayments.application.exceptions.PaymentOptionNotFoundException;
 import com.techchallenge.mspayments.application.mapper.PaymentOptionMappers;
 import com.techchallenge.mspayments.domain.entity.PaymentOptionDomainEntityInput;
 import com.techchallenge.mspayments.domain.entity.PaymentOptionDomainEntityOutput;
@@ -24,8 +25,7 @@ public class PaymentOptiosDomainServiceImp implements IPaymentOptiosDomainServic
         final var entity = PaymentOptionMappers.mapToPaymentEntity(input);
         final var oldPaymentOption = paymentOptionEntityRepository.findByExternalDriverId(entity.getExternalDriverId());
 
-        if (oldPaymentOption != null)
-            paymentOptionEntityRepository.delete(oldPaymentOption);
+        oldPaymentOption.ifPresent(paymentOptionEntityRepository::delete);
 
         final var entitySaved = paymentOptionEntityRepository.save(entity);
 
@@ -41,6 +41,10 @@ public class PaymentOptiosDomainServiceImp implements IPaymentOptiosDomainServic
     @Override
     public PaymentOptionDomainEntityOutput findPaymentOptionByExternalDriverId(UUID id) {
         final var entity = paymentOptionEntityRepository.findByExternalDriverId(id);
-        return PaymentOptionMappers.mapToPaymentOptionDomainEntityOutput(entity);
+
+        if (entity.isEmpty())
+            throw new PaymentOptionNotFoundException("Forma de pagamento não encontrada para o id do motorista externo.");
+
+        return PaymentOptionMappers.mapToPaymentOptionDomainEntityOutput(entity.get());
     }
 }
